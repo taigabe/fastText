@@ -80,6 +80,16 @@ If these requirements make it impossible for you to use fastText, please open an
 
 We discuss building the latest stable version of fastText.
 
+## Building fastText for Naiz
+
+In order to use fastText in Naiz we need to get the command line program `fastText`. We want to deploy this binary directly, without having to compile it in the target servers. For this, we need to change `Makefile` for `fastText` from dynamic linking to static linking.
+
+Now we can do:
+
+`make fasttext`
+
+It should produce the binary `./fasttext` which is the file we have to deploy together with the Naiz model.
+
 ### Getting the source code
 
 You can find our [latest stable release](https://github.com/facebookresearch/fastText/releases/latest) in the usual place.
