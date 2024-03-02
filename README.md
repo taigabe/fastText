@@ -12,6 +12,7 @@
    * [Cheatsheet](#cheatsheet)
 * [Requirements](#requirements)
 * [Building fastText](#building-fasttext)
+   * [Building fastText for Naiz](#building-fasttext-for-naiz)
    * [Getting the source code](#getting-the-source-code)
    * [Building fastText using make (preferred)](#building-fasttext-using-make-preferred)
    * [Building fastText using cmake](#building-fasttext-using-cmake)
@@ -82,13 +83,26 @@ We discuss building the latest stable version of fastText.
 
 ## Building fastText for Naiz
 
-In order to use fastText in Naiz we need to get the command line program `fastText`. We want to deploy this binary directly, without having to compile it in the target servers. For this, we need to change `Makefile` for `fastText` from dynamic linking to static linking.
+To utilize fastText in Naiz, we must obtain the command line program
+`fastText`. To streamline the deployment process, we prefer deploying the
+binary directly to the target servers without the need for compilation. In
+order to achieve this, it is necessary to modify the `Makefile` for `fastText`
+to switch from dynamic linking to static linking.
 
-Now we can do:
+A Dockerfile has been provided for ensuring consistent builds.
 
-`make fasttext`
+To build the image, execute the following command:
+```bash
+docker build -t naiz-fasttext .
+```
 
-It should produce the binary `./fasttext` which is the file we have to deploy together with the Naiz model.
+Compile fastText using the command:
+```bash
+docker run --rm -v $(pwd):/app naiz-fasttext make fasttext
+```
+
+This command will generate the binary file `./fasttext`,  which is the file we
+have to deploy together with the Naiz model.
 
 ### Getting the source code
 
